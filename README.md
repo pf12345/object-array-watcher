@@ -38,6 +38,32 @@
 
 ```
 
-但是对应object 属性的监控，需要在开始初始化相关属性，若没有初始化，将不能监控；如上例中"b",对其进行相关数据改变，将不会监控其变化
+但是对应object 属性的监控，需要在开始初始化相关属性，若没有初始化，将不能监控；如上例中"b",对其进行相关数据改变，将不会监控其变化;
+
+```
+
+var b = {
+        name: 'pf',
+        age: 32,
+        list: [1, 3, {
+            from: 'china'
+        }]
+    };
+
+    new Watcher({
+        arrayCb: function (method) {
+            console.log(method)
+        },
+        propertyCb: function (obj, key, newVal) {
+            console.log(key);
+        }
+    }).observe(b);
+
+    b.name = 'pengfeng';
+    b.list.push({
+        from: 'USA'
+    });
+
+```
 
 
