@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./index.js"></script>
+</head>
+<body>
+
+<script>
+    var a = [1,2,3];
+    new Watcher({
+        arrayCb: function (method) {
+           console.log(method)
+        },
+        propertyCb: function (obj, key, newVal) {
+            console.log(key);
+        }
+    }).observe(a);
+    a.push({a: 1});
+    a[3].a = 10;
+</script>
+</body>
+</html>
