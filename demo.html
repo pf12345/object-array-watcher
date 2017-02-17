@@ -8,10 +8,10 @@
 <body>
 
 <script>
-    var a = [1,2,3];
+    var a = [1, 2, 3];
     new Watcher({
         arrayCb: function (method) {
-           console.log(method)
+            console.log(method)
         },
         propertyCb: function (obj, key, newVal) {
             console.log(key);
@@ -19,6 +19,28 @@
     }).observe(a);
     a.push({a: 1});
     a[3].a = 10;
+
+    var b = {
+        name: 'pf',
+        age: 32,
+        list: [1, 3, {
+            from: 'china'
+        }]
+    };
+
+    new Watcher({
+        arrayCb: function (method) {
+            console.log(method)
+        },
+        propertyCb: function (obj, key, newVal) {
+            console.log(key);
+        }
+    }).observe(b);
+
+    b.name = 'pengfeng';
+    b.list.push({
+        from: 'USA'
+    });
 </script>
 </body>
 </html>
