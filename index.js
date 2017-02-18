@@ -62,6 +62,21 @@
                 if (_config.arrayCb && typeof _config.arrayCb === 'function') {
                     _config.arrayCb(method);
                 }
+
+                if (CustomEvent && document.dispatchEvent) {
+                    var arrEvent = new CustomEvent('watcherArrChange', {
+                        'method': method
+                    });
+                    document.dispatchEvent(arrEvent);
+                    var dataEvent = new CustomEvent('watcherDataChange', {
+                        'detail': {
+                            method: method
+                        }
+                    });
+                    document.dispatchEvent(dataEvent);
+                }
+
+
                 if (inserted) {
                     ob.observeArray(inserted);
                 }
@@ -202,6 +217,26 @@
                 if (_config.propertyCb && typeof _config.propertyCb === 'function') {
                     _config.propertyCb(obj, key, newVal);
                 }
+
+                if (CustomEvent && document.dispatchEvent) {
+                    var proEvent = new CustomEvent('watcherProChange', {
+                        detail: {
+                            'obj': obj,
+                            'key': key,
+                            'newVal': newVal
+                        }
+                    });
+                    document.dispatchEvent(proEvent);
+                    var dataEvent = new CustomEvent('watcherDataChange', {
+                        detail: {
+                            'obj': obj,
+                            'key': key,
+                            'newVal': newVal
+                        }
+                    });
+                    document.dispatchEvent(dataEvent);
+                }
+
                 childOb = observe(newVal);
             }
         });

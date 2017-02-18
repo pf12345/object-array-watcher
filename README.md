@@ -66,4 +66,53 @@ var b = {
 
 ```
 
+也可通过事件方式监控数据变化后操作：
+
+1、watcherDataChange：数据变化事件
+
+2、watcherProChange：对象属性变化事件
+
+3、watcherArrChange：数组数据变化事件
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./index.js"></script>
+</head>
+<body>
+
+<script>
+
+    var b = {
+        name: 'pf',
+        age: 32,
+        list: [1, 3, {
+            from: 'china'
+        }]
+    };
+
+    new Watcher().observe(b);
+
+    document.addEventListener('watcherDataChange', function (e) {
+        console.log(e);
+    });
+    document.addEventListener('watcherArrChange', function (e) {
+        console.log(e);
+    });
+    document.addEventListener('watcherProChange', function (e) {
+        console.log(e);
+    });
+
+    b.name = 'pengfeng';
+    b.list.push({
+        from: 'USA'
+    });
+</script>
+</body>
+</html>
+
+```
 
